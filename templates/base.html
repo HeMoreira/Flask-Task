@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--<title>Nome do Titulo da Pagina</title>-->
+    {% block head %}{% endblock head %}
+</head>
+<body>
+    <!--<h1>escrever essa base sempre cansa...</h1>-->
+    {% block body %}{% endblock body %}
+    <!--|Isso facilitará a nossa vida em index.html, já que estilos e quaisquer outras|-->
+    <!--|modificações que possamos querer em todos os demais arquivos html podem ser  |-->
+    <!--|escritos automaticamente junto com a base                                    |-->
+</body>
+</html>
