@@ -1,0 +1,1 @@
+Programa feito pelo Flask capaz de organizar sua rotina com tarefas dinâmicas que podem ser adicionadas, excluidas, e um pouco mais (só um pouco mesmo)
