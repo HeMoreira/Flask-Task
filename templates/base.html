@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!--|url_for('static') devolve o caminho para a pasta static independente de onde estejamos|-->
+    <!--|isso é importante se quisermos usar essa base para arquivos que iriam possuir caminhos|-->
+    <!--|diferentes para a pasta static, como fora de templates nesse caso                     |-->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <!--<title>Nome do Titulo da Pagina</title>-->
     {% block head %}{% endblock head %}
 </head>
 <body>
-    <!--<h1>escrever essa base sempre cansa...</h1>-->
     {% block body %}{% endblock body %}
-    <!--|Isso facilitará a nossa vida em index.html, já que estilos e quaisquer outras|-->
-    <!--|modificações que possamos querer em todos os demais arquivos html podem ser  |-->
-    <!--|escritos automaticamente junto com a base                                    |-->
 </body>
 </html>

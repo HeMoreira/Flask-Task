@@ -1,56 +1,55 @@
-<!--
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Site Feito com o Flask :)</title>
-</head>
-<body>
-    <h1>Olá! Eu sou Flask (talvez)</h1>
-</body>
-</html>
--->
 {% extends 'base.html' %}
 
 {% block head %}
-
+<title>Flask Task</title>
 {% endblock head %}
+
 {% block body %}
-<!--<h1>Olá! Eu sou Flask (talvez :P)</h1>-->
-<div class="content">
-    <h1>Lista de Tarefas</h1>
-    {% if tasks|length < 1 %}
-    <p style="color: yellow">Não existem tasks para editar, crie uma no espaço acima</p>
-    {% else %}
-    <form action="/" method="POST">
-        <input type="text" name="content" id="content">
-        <input type="submit" value="Adicionar Task">
-    </form>
-    <br>
-    <table>
-        <thead>
+<h1>Lista de Compras</h1>
+<p>Adicionar novo Produto:</p>
+<form action="/" method="POST">
+    <input type="text" name="nome" id="nome" placeholder="Digite o nome do produto">
+    <input type="number" name="quantidade" min="0" id="quantidade" style="width: 65px;" placeholder="Quantia">
+    <input type="number" name="preco" step="any" min="0" id="preco" style="width: 65px;" placeholder="Preço">
+    <input type="submit" value="Adicionar Produto">
+</form>
+<br>
+<p>Lista de Produtos:</p>
+{% if itens|length < 1 %}
+<p style="color: rgb(rgb(255, 166, 0))">Não existem produtos em sua lista de compras, crie uma no espaço acima</p>
+{% else %}
+<table>
+    <thead>
+        <tr>
+            <th>Nome do Item</th>
+            <th>Estoque</th>
+            <th>Preço Unitário</th>
+            <th>Outras Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in itens %}
+            
             <tr>
-                <th>Tarefa</th>
-                <th>Data da Adição</th>
-                <th>Acões</th>
+                <td style="text-align: left;">{{ item.nome }}</td>
+                <td>
+                    <p>Quantidade: {{ item.quantidade }}</p>
+                    <p><strong>Ajustar Quantia</strong><br><a href="/diminuir_quantidade/{{item.id}}" class="sem_sublinhado"><small>&#x2796;</small></a> {{ item.quantidade }} <a href="/aumentar_quantidade/{{item.id}}" class="sem_sublinhado"><small>&#x2795;</small></a></p>
+                </td>
+                <td>
+                    <p>Preço: {{ item.preco }}</p><strong>Alterar Preço</strong>
+                    <form action="/alterar_preco/{{item.id}}" method="POST">
+                        <input type="number" name="alt_preco" step="any" min="0" id="alt_preco" style="width: 85px;" placeholder="Novo Preço">
+                        <input type="submit" value="Alterar">
+                    </form>
+                    <p></p>
+                </td>
+                <td><a href="/delete/{{item.id}}"><strong>Remover</strong></a></td>
             </tr>
-        </thead>
-        <tbody>
-            {% for task in tasks %}
-                <tr>
-                    <td>{{ task.content }}</td>
-                    <td>{{ task.date_created.date() }}</td>
-                    <td>
-                        <a href="/delete/{{task.id}}">Deletar</a>
-                        <br>
-                        <a href="/update/{{task.id}}">Atualizar</a>
-                    </td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    {% endif %}
-</div>
+        {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+<h2 style="font-size: 30px;">Valor Total:</h2>
+<p style="font-size: 20px;">{{ total }}</p>
 {% endblock body %}
